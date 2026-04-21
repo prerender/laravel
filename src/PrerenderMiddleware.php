@@ -89,6 +89,7 @@ class PrerenderMiddleware
         if ($this->prerenderToken) {
             $headers['X-Prerender-Token'] = $this->prerenderToken;
         }
+        $headers['X-Prerender-Int-Type'] = 'Laravel';
 
         try {
             return $this->client->get($this->buildApiUrl($request), compact('headers'));
