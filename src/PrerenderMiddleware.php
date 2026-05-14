@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PrerenderMiddleware
 {
+    public const VERSION = '1.0.0';
+
     private bool $returnSoftHttpCodes;
     private bool $useFullURL;
     private string $prerenderUrl;
@@ -90,6 +92,8 @@ class PrerenderMiddleware
             $headers['X-Prerender-Token'] = $this->prerenderToken;
         }
         $headers['X-Prerender-Int-Type'] = 'Laravel';
+        $headers['X-Prerender-Int-Version'] = self::VERSION;
+        $headers['X-Prerender-Request-Id'] = (string) Str::uuid();
 
         try {
             return $this->client->get($this->buildApiUrl($request), compact('headers'));
