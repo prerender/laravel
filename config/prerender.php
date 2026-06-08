@@ -25,6 +25,6 @@ return [
         'embedly', 'quora link preview', 'showyoubot', 'outbrain',
         'pinterest', 'slackbot', 'w3c_validator', 'redditbot', 'applebot',
         'discordbot', 'perplexity', 'oai-searchbot', 'chatgpt-user',
-        'gptbot', 'claudebot', 'amazonbot',
+        'gptbot', 'claudebot', 'amazonbot', 'iframely',
     ],
 ];
