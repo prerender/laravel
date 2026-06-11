@@ -51,7 +51,7 @@ Never prerender URLs matching the blacklist (static assets are blacklisted by de
 'blacklist' => ['*.js', '*.css', '/admin/*'],
 ```
 
-Patterns support `*` wildcards.
+Patterns support `*` wildcards. Blacklist patterns are matched with the query string stripped, so `*.woff2` also matches `/font.woff2?v=3`.
 
 ## How it works
 

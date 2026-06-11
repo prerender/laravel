@@ -71,7 +71,10 @@ class PrerenderMiddleware
             return false;
         }
 
-        $uris = array_values(array_filter([$request->getRequestUri(), $request->headers->get('Referer')]));
+        $uris = array_values(array_filter([
+            $this->stripQueryString($request->getRequestUri()),
+            $this->stripQueryString($request->headers->get('Referer')),
+        ]));
         if ($this->blacklist && $this->isListed($uris, $this->blacklist)) return false;
 
         return true;
@@ -118,6 +121,11 @@ class PrerenderMiddleware
             return $request->fullUrl();
         }
         return $request->getScheme() . '://' . $request->getHost() . $request->getRequestUri();
+    }
+
+    private function stripQueryString(?string $uri): ?string
+    {
+        return $uri === null ? null : explode('?', $uri, 2)[0];
     }
 
     private function isListed(string|array $needles, array $list): bool
