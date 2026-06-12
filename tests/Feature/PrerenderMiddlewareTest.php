@@ -22,7 +22,7 @@ function makeMiddleware(array $guzzleResponses = []): PrerenderMiddleware
         'prerender.full_url'               => false,
         'prerender.timeout'                => 0,
         'prerender.whitelist'              => [],
-        'prerender.blacklist'              => ['*.js', '*.css', '*.png'],
+        'prerender.blacklist'              => ['*.js', '*.css', '*.png', '*.woff2'],
         'prerender.crawler_user_agents'    => ['googlebot', 'bingbot', 'twitterbot'],
     ]);
 
@@ -52,6 +52,15 @@ it('returns prerendered response for bot UA', function () {
 it('passes static assets through even with bot UA', function () {
     $middleware = makeMiddleware();
     $request = Request::create('/app.js', 'GET', [], [], [], ['HTTP_USER_AGENT' => BOT_UA]);
+
+    $response = $middleware->handle($request, fn () => response('normal response'));
+
+    expect($response->getContent())->toBe('normal response');
+});
+
+it('passes versioned font assets through even with bot UA', function () {
+    $middleware = makeMiddleware();
+    $request = Request::create('/font.woff2?v=3', 'GET', [], [], [], ['HTTP_USER_AGENT' => BOT_UA]);
 
     $response = $middleware->handle($request, fn () => response('normal response'));
 

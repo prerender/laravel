@@ -17,6 +17,7 @@ return [
         '*.mpeg', '*.tif', '*.wav', '*.mov', '*.psd', '*.ai', '*.xls',
         '*.mp4', '*.m4a', '*.swf', '*.dat', '*.dmg', '*.iso', '*.flv',
         '*.m4v', '*.torrent', '*.ttf', '*.woff', '*.woff2', '*.svg',
+        '*.otf', '*.eot', '*.webp', '*.avif', '*.webmanifest',
     ],
 
     'crawler_user_agents' => [
